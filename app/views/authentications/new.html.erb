@@ -11,7 +11,7 @@
             <div class="crm-logo">
               <div class="crm-logo-txt">StrongArm CRM</div>
             </div>
-            <p class="warning"><%= warning %></p>
+            <p class="alert"><%= alert %></p>
             <%= form_for @authentication, :url => authentication_path, :html => one_submit_only do |f| %>            
                 <%= f.text_field :username, autofocus: true, :placeholder => "EMAIL", :class=> "login-field"%>            
                 <%= f.password_field :password, autocomplete: "off", :placeholder => "PASSWORD", :class=>"login-field" %>
