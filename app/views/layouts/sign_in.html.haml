@@ -4,17 +4,19 @@
     %meta{ "http-equiv" => "Content-Type", :content => "text/html; charset=utf-8" }
     %title StrongArm CRM
     == <!-- #{controller.controller_name} : #{controller.action_name} -->
-    = stylesheet_link_tag :application
-    = stylesheet_link_tag :print, :media => 'print'
-    = hook(:stylesheet_includes, self) do
-      #{yield :stylesheet_includes}
-    %style= yield :styles
+    = stylesheet_link_tag :webflow
+    = stylesheet_link_tag :normalize
+    = stylesheet_link_tag :webflow_strongarm
+    / = stylesheet_link_tag :print, :media => 'print'
+    / = hook(:stylesheet_includes, self) do
+    /   #{yield :stylesheet_includes}
+    / %style= yield :styles
 
     = javascript_include_tag :application
 
-    - unless tabless_layout? || %w(en-US en-GB).include?(I18n.locale.to_s)
-      = javascript_include_tag "jquery_ui_datepicker/jquery.ui.datepicker-#{I18n.locale}"
-      = javascript_include_tag "jquery_ui_datepicker/jquery-ui-timepicker-#{I18n.locale}"
+    / - unless tabless_layout? || %w(en-US en-GB).include?(I18n.locale.to_s)
+    /   = javascript_include_tag "jquery_ui_datepicker/jquery.ui.datepicker-#{I18n.locale}"
+    /   = javascript_include_tag "jquery_ui_datepicker/jquery-ui-timepicker-#{I18n.locale}"
 
     = csrf_meta_tag
     = hook(:javascript_includes, self)
@@ -34,11 +36,11 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
   %body
-    = render "layouts/header"
-    - if tabless_layout?
-      = render "layouts/tabless"
-    - else
-      = render "layouts/tabbed"
+    / = render "layouts/header"
+    / - if tabless_layout?
+    /   = render "layouts/tabless"
+    / - else
+    /   = render "layouts/tabbed"
       / = render "layouts/footer"
 
     %script{:type => "text/javascript"}

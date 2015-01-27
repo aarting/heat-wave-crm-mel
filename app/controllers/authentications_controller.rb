@@ -10,6 +10,7 @@ class AuthenticationsController < ApplicationController
   #----------------------------------------------------------------------------
   def new
     @authentication = Authentication.new
+    render layout: "sign_in"
   end
 
   #----------------------------------------------------------------------------
