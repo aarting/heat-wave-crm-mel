@@ -43,8 +43,6 @@
     /   = render "layouts/tabbed"
     /   = render "layouts/footer"
     = yield
-      .alert
-        = alert
 
     %script{:type => "text/javascript"}
       = "crm.base_url = '#{Setting.base_url}';" unless Setting.base_url.blank?
