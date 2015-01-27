@@ -1,0 +1,29 @@
+<html>
+<body class="login-body">
+  <div class="login-sect">
+    <div class="login-div">
+      <div class="modal-bkg">
+        <div class="modal-window">
+          <div class="modal-width-div">
+            <div class="login-logo">
+              <%= image_tag "logo.png" %>
+            </div>
+            <p class="notice"><%= notice %></p>
+            <p class="alert"><%= alert %></p>
+            <%= form_for @authentication, :url => authentication_path, :html => one_submit_only do |f|             
+                <%= f.text_field :username, autofocus: true, :placeholder => "EMAIL", :class=> "login-field"%>            
+                <%= f.password_field :password, autocomplete: "off", :placeholder => "PASSWORD", :class=>"login-field" %>
+                <div class="w-clearfix login-forgot-password">
+                  <div class="w-inline-block login-forgot-lnkblk">
+                    <%= link_to "Forgot Your Password?", new_password_path, :class=> "login-forgot-txt"%>
+                  </div>
+                </div>              
+              <%= f.submit "LOGIN", :class=> "button login-btn" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
