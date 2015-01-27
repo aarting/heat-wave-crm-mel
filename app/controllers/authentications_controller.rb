@@ -34,8 +34,7 @@ class AuthenticationsController < ApplicationController
       # else
       #   flash[:warning] = t(:msg_invalig_login)
       # end
-      redirect_to action: :new, alert: "Username or password do not match our records.
-      Please try again."
+      redirect_to action: :new, alert: "Username or password do not match our records.  Please try again."
     end
   end
 
