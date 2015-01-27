@@ -6,7 +6,6 @@
 require 'spec_helper'
 
 describe EntityObserver do
-
   before do
     allow(Setting).to receive(:host).and_return('http://www.example.com')
     allow(PaperTrail).to receive(:whodunnit).and_return(assigner)
@@ -17,7 +16,7 @@ describe EntityObserver do
       let(:assignee) { FactoryGirl.create(:user) }
       let(:assigner) { FactoryGirl.create(:user) }
       let!(:entity)  { FactoryGirl.build(entity_type, user: assigner, assignee: assignee) }
-      let(:mail) { double('mail', deliver: true) }
+      let(:mail) { double('mail', deliver_now: true) }
 
       after :each do
         entity.save
@@ -41,14 +40,13 @@ describe EntityObserver do
         allow(Setting).to receive(:host).and_return('')
         expect(UserMailer).not_to receive(:assigned_entity_notification)
       end
-
     end
 
     describe "on update of #{entity_type}" do
       let(:assignee) { FactoryGirl.create(:user) }
       let(:assigner) { FactoryGirl.create(:user) }
       let!(:entity)  { FactoryGirl.create(entity_type, user: FactoryGirl.create(:user)) }
-      let(:mail) { double('mail', deliver: true) }
+      let(:mail) { double('mail', deliver_now: true) }
 
       it "notifies the new owner if the entity is re-assigned" do
         expect(UserMailer).to receive(:assigned_entity_notification).with(entity, assigner).and_return(mail)
@@ -70,6 +68,5 @@ describe EntityObserver do
         entity.update_attributes(assignee: assigner)
       end
     end
-
   end
 end

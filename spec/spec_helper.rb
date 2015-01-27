@@ -9,6 +9,7 @@ ENV["RAILS_ENV"] = 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
+require 'paper_trail/frameworks/rspec'
 
 require 'acts_as_fu'
 require 'factory_girl_rails'
@@ -20,10 +21,10 @@ Coveralls.wear!
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
-Dir["./spec/support/**/*.rb"].sort.each {|f| require f}
+Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
 
 # Load shared behavior modules to be included by Runner config.
-Dir["./spec/shared/**/*.rb"].sort.each {|f| require f}
+Dir["./spec/shared/**/*.rb"].sort.each { |f| require f }
 
 TASK_STATUSES = %w(pending assigned completed).freeze
 
@@ -40,7 +41,7 @@ RSpec.configure do |config|
 
   # RSpec configuration options for Fat Free CRM.
   config.include RSpec::Rails::Matchers
-  config.include(FactoryGirl::Syntax::Methods)
+  config.include FactoryGirl::Syntax::Methods
 
   config.before(:each) do
     # Overwrite locale settings within "config/settings.yml" if necessary.
@@ -97,13 +98,13 @@ ActionView::Base.class_eval do
 
   def called_from_index_page?(controller = controller_name)
     if controller != "tasks"
-      request.referer =~ %r(/#{controller}$)
+      request.referer =~ %r{/#{controller}$}
     else
       request.referer =~ /tasks\?*/
     end
   end
 
   def called_from_landing_page?(controller = controller_name)
-    request.referer =~ %r(/#{controller}/\w+)
+    request.referer =~ %r{/#{controller}/\w+}
   end
 end

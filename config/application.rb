@@ -12,12 +12,15 @@ require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "sprockets/railtie"
+
+# TODO: require from ransack_ui
+require "ransack/constants"
+
 # require "rails/test_unit/railtie"
 #
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
-
 
 # Override Rails Engines so that plugins have higher priority than the Application
 require 'fat_free_crm/gem_ext/rails/engine'
@@ -42,7 +45,7 @@ module FatFreeCRM
 
     # Load development rake tasks (RSpec, Gem packaging, etc.)
     rake_tasks do
-      Dir.glob(Rails.root.join('lib', 'development_tasks', '*.rake')).each {|t| load t }
+      Dir.glob(Rails.root.join('lib', 'development_tasks', '*.rake')).each { |t| load t }
     end
 
     # Add migrations from all engines
@@ -67,6 +70,8 @@ module FatFreeCRM
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password, :password_hash, :password_salt, :password_confirmation]
+
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end
 
